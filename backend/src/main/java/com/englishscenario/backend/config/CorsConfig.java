@@ -19,8 +19,8 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         // 允许前端的地址访问
-        config.addAllowedOriginPattern("http://localhost:3000");  // React开发服务器
-        config.addAllowedOriginPattern("http://localhost:*");     // 允许所有localhost端口
+        config.addAllowedOriginPattern("http://englishai:3000");  // React开发服务器
+        config.addAllowedOriginPattern("http://englishai:*");     // 允许所有localhost端口
 
         // 允许的HTTP方法
         config.addAllowedMethod("GET");

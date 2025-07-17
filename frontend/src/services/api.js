@@ -1,9 +1,18 @@
 // src/services/api.js
 import axios from 'axios';
 
-// 创建axios实例
+// 根据环境设置不同的API地址
+const getBaseURL = () => {
+  // 生产环境
+  if (window.location.hostname !== 'localhost') {
+    return '/api';  // 使用相对路径，通过nginx代理
+  }
+  // 开发环境
+  return 'http://localhost:8080/api';
+};
+
 const api = axios.create({
-  baseURL: 'http://localhost:8080/api',
+  baseURL: getBaseURL(),
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json'
