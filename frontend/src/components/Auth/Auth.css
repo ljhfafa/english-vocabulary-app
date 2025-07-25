@@ -55,7 +55,7 @@
 }
 
 .form-group input {
-  width: 100%;
+  width: 90%;
   padding: 12px 15px;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
@@ -77,6 +77,7 @@
 
 /* 密码输入包装器 */
 .password-input-wrapper {
+  width:90%;
   position: relative;
 }
 

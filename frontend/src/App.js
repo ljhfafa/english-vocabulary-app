@@ -54,7 +54,7 @@ function App() {
       const health = await vocabularyAPI.checkHealth();
       if (health.status === 'UP') {
         setBackendStatus('connected');
-        toast.success('后端服务连接成功！');
+        toast.success('智能外语服务连接成功！');
       }
     } catch (error) {
       setBackendStatus('disconnected');
@@ -202,7 +202,7 @@ function App() {
         <div className="backend-status">
           <span className={`status-indicator ${backendStatus}`}></span>
           <span className="status-text">
-            后端服务：
+            智能外语服务：
             {backendStatus === 'checking' && '检查中...'}
             {backendStatus === 'connected' && '已连接'}
             {backendStatus === 'disconnected' && '未连接'}
