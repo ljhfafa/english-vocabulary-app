@@ -17,12 +17,18 @@ function AdminDashboard({ onClose }) {
   const fetchDashboardData = async () => {
     try {
       setRefreshing(true);
-      const response = await fetch('http://localhost:8080/api/admin/dashboard');
-      
+
+      // 自动适配开发环境与生产环境
+      const baseURL = window.location.hostname === 'localhost'
+        ? 'http://localhost:8080'
+        : '';
+
+      const response = await fetch(`${baseURL}/api/admin/dashboard`);
+
       if (!response.ok) {
         throw new Error('Failed to fetch dashboard data');
       }
-      
+
       const data = await response.json();
       setDashboardData(data);
       setLoading(false);
@@ -34,6 +40,7 @@ function AdminDashboard({ onClose }) {
       setRefreshing(false);
     }
   };
+
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
