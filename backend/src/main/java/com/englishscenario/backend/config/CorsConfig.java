@@ -6,39 +6,34 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-/**
- * CORS（跨域资源共享）配置
- * 允许前端应用（运行在不同端口）访问后端API
- */
-@Configuration  // 标记这是一个配置类
+@Configuration
 public class CorsConfig {
 
-    @Bean  // 将方法返回的对象注册为Spring Bean
+    @Bean
     public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
 
-        // 允许前端的地址访问
-        config.addAllowedOriginPattern("http://englishai:3000");  // React开发服务器
-        config.addAllowedOriginPattern("http://englishai:*");     // 允许所有localhost端口
+        // ✅ 添加生产环境的域名（支持 https）
+        config.addAllowedOrigin("https://englishai.tech");
+        config.addAllowedOrigin("https://www.englishai.tech");
 
-        // 允许的HTTP方法
-        config.addAllowedMethod("GET");
-        config.addAllowedMethod("POST");
-        config.addAllowedMethod("PUT");
-        config.addAllowedMethod("DELETE");
-        config.addAllowedMethod("OPTIONS");
+        // ✅ 本地开发环境继续支持
+        config.addAllowedOriginPattern("http://localhost:*");
+        config.addAllowedOriginPattern("http://127.0.0.1:*");
 
-        // 允许的请求头
+        // ✅ 允许所有方法和请求头
+        config.addAllowedMethod("*");
         config.addAllowedHeader("*");
 
-        // 是否允许发送Cookie
+        // ✅ 允许携带 Cookie
         config.setAllowCredentials(true);
 
-        // 配置有效期
         config.setMaxAge(3600L);
 
-        source.registerCorsConfiguration("/api/**", config);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        // 作用范围你可以用 /** 或 /api/** 看你的项目路径
+        source.registerCorsConfiguration("/**", config);
+
         return new CorsFilter(source);
     }
 }
